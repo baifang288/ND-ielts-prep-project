@@ -18,6 +18,12 @@ export function useAiStatus(): AiStatus {
   const [s, setS] = useState<AiStatus>(cached ?? { configured: false, needsCode: false, checked: false });
   useEffect(() => {
     if (cached) return;
+    if (process.env.NEXT_PUBLIC_STATIC_EXPORT === "1") {
+      // Static website: there is no server to hold an API key.
+      cached = { configured: false, needsCode: false, checked: true };
+      setS(cached);
+      return;
+    }
     fetch("/api/ai", { method: "GET", cache: "no-store" })
       .then((r) => r.json())
       .then((j) => {

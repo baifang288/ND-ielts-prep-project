@@ -97,7 +97,10 @@ export default function SettingsPage() {
           สถานะ: {!ai.checked ? "กำลังตรวจ…" : ai.configured ? <span className="badge ok">พร้อมใช้งาน{ai.model ? ` · ${ai.model}` : ""}</span> : <span className="badge warn">ยังไม่ได้ตั้งค่า</span>}
           {ai.error && <span className="small muted"> ({ai.error})</span>}
         </p>
-        {!ai.configured && (
+        {!ai.configured && process.env.NEXT_PUBLIC_STATIC_EXPORT === "1" && (
+          <p className="small">เว็บเวอร์ชันนี้เป็นเว็บแบบ static (เช่น GitHub Pages) ซึ่งไม่มีเซิร์ฟเวอร์สำหรับเก็บ API key จึงใช้ AI ในแอปไม่ได้ ทุกฟีเจอร์อื่นใช้ได้ตามปกติ และใช้ปุ่มคัดลอกคำสั่งไปถาม AI ภายนอกได้ ถ้าต้องการ AI ในแอป ให้ deploy บน Vercel ตาม README</p>
+        )}
+        {!ai.configured && process.env.NEXT_PUBLIC_STATIC_EXPORT !== "1" && (
           <div className="small">
             <p>AI ทำงานบนเซิร์ฟเวอร์เท่านั้น (API key ไม่ถูกส่งมาที่เบราว์เซอร์) วิธีเปิดใช้:</p>
             <ol style={{ margin: "0 0 0.5rem 1.2rem", padding: 0 }}>

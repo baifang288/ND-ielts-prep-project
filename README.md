@@ -62,6 +62,19 @@ cp .env.example .env.local
 Restart the server. **Settings** shows whether AI is ready. If you set an access code, enter it once in Settings.
 Never put the key in a `NEXT_PUBLIC_` variable.
 
+## Use it in the browser (GitHub Pages, no install)
+
+The app is published as a static website at **https://baifang288.github.io/ND-ielts-prep-project/**. It works on Windows, Mac and phones in Chrome or Edge. AI feedback is not available there (a static site has no server for the API key); everything else works, including the copy-prompt buttons for an external AI.
+
+To update the website after changing the code:
+
+```bash
+npm run build:static                     # writes the site to out/
+# then publish out/ to the gh-pages branch, for example:
+cd out && git init -b gh-pages && git add -A && git commit -m "Publish" \
+  && git push -f https://github.com/baifang288/ND-ielts-prep-project gh-pages
+```
+
 ## Deploy so you can open it on your phone
 
 **Vercel** is the simplest:
